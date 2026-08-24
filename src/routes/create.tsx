@@ -7,9 +7,8 @@ import { quote, routeAgent, settleX402, type Mood } from "@/lib/protocol";
 import mascot from "@/assets/mascot.png";
 
 export const Route = createFileRoute("/create")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    seed: typeof search.seed === "string" ? search.seed : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { seed?: string } =>
+    typeof search["seed"] === "string" ? { seed: search["seed"] } : {},
   head: () => ({
     meta: [
       { title: "Create a Memory — Dear Diary" },
